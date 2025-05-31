@@ -29,3 +29,31 @@ This is a basic example of integrating JBoss EAP 7.3 with SAML 2.0 and JAAS.
         <login-module code="com.example.security.CustomSAMLLoginModule" flag="optional"/>
     </authentication>
 </security-domain>
+
+
+
+
+
+
+picketlink.xml
+
+<PicketLink xmlns="urn:picketlink:config:2.1">
+    
+    <PicketLinkSP 
+        xmlns="urn:picketlink:config:2.1"
+        BindingType="POST"
+        IdentityURL="https://idp.example.com/idp"
+        ServiceURL="http://localhost:8080/saml-jaas-example/">
+        
+        <!-- Configuração de chave para assinar/descriptografar -->
+        <KeyProvider>
+            <!-- Caminho RELATIVO ao classpath -->
+            <KeyStoreFile>sp-keystore.jks</KeyStoreFile>
+            <KeyStorePass>changeit</KeyStorePass>
+            <SigningKeyAlias>sp-key</SigningKeyAlias>
+            <SigningKeyPass>changeit</SigningKeyPass>
+        </KeyProvider>
+        
+    </PicketLinkSP>
+</PicketLink>
+
