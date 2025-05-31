@@ -1,0 +1,4 @@
+<jboss-web>
+    <!-- Link to the security domain configured in JBoss EAP standalone.xml -->
+    <security-domain>saml-jaas</security-domain>
+</jboss-web>
