@@ -41,3 +41,29 @@ This is a basic example of integrating JBoss EAP 7.3 with SAML 2.0 and JAAS.
         <role-name>user</role-name>
     </auth-constraint>
 </security-constraint>
+
+
+
+
+
+
+
+<%@ page contentType="text/html;charset=UTF-8" language="java" %>
+<html>
+<head>
+    <title>Redirect POST</title>
+    <script type="text/javascript">
+        window.onload = function() {
+            document.forms['postRedirectForm'].submit();
+        };
+    </script>
+</head>
+<body>
+    <form name="postRedirectForm" method="post" action="destino.jsp">
+        <input type="hidden" name="param1" value="<%= request.getParameter("param1") %>">
+        <input type="hidden" name="param2" value="<%= request.getParameter("param2") %>">
+    </form>
+    <p>Redirecionando...</p>
+</body>
+</html>
+
