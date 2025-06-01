@@ -15,45 +15,4 @@ This is a basic example of integrating JBoss EAP 7.3 with SAML 2.0 and JAAS.
 2. Deploy this WAR to `$JBOSS_HOME/standalone/deployments/`.
 3. Configure your IdP with matching SP EntityID and Assertion Consumer Service (ACS) URL.
 
-<security-domain name="saml-jaas" cache-type="default">
-    <authentication>
-        <login-module code="org.picketlink.identity.federation.bindings.jboss.auth.SAML2LoginModule" flag="required">
-            <module-option name="roleKey" value="Role"/>
-            <module-option name="principalKey" value="Principal"/>
-            <module-option name="identityURL" value="https://idp.example.com/idp"/>
-            <module-option name="spEntityID" value="urn:jboss:sp"/>
-            <module-option name="idpMetadataURL" value="https://idp.example.com/metadata"/>
-            <module-option name="strictPostBinding" value="true"/>
-        </login-module>
-
-        <login-module code="com.example.security.CustomSAMLLoginModule" flag="optional"/>
-    </authentication>
-</security-domain>
-
-
-
-
-
-
-picketlink.xml
-
-<PicketLink xmlns="urn:picketlink:config:2.1">
-    
-    <PicketLinkSP 
-        xmlns="urn:picketlink:config:2.1"
-        BindingType="POST"
-        IdentityURL="https://idp.example.com/idp"
-        ServiceURL="http://localhost:8080/saml-jaas-example/">
-        
-        <!-- Configuração de chave para assinar/descriptografar -->
-        <KeyProvider>
-            <!-- Caminho RELATIVO ao classpath -->
-            <KeyStoreFile>sp-keystore.jks</KeyStoreFile>
-            <KeyStorePass>changeit</KeyStorePass>
-            <SigningKeyAlias>sp-key</SigningKeyAlias>
-            <SigningKeyPass>changeit</SigningKeyPass>
-        </KeyProvider>
-        
-    </PicketLinkSP>
-</PicketLink>
 
