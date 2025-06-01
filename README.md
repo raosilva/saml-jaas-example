@@ -16,3 +16,7 @@ This is a basic example of integrating JBoss EAP 7.3 with SAML 2.0 and JAAS.
 3. Configure your IdP with matching SP EntityID and Assertion Consumer Service (ACS) URL.
 
 
+<login-config>
+    <auth-method>BASIC</auth-method>
+    <realm-name>ApplicationRealm</realm-name>
+</login-config>
