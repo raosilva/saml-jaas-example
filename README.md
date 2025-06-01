@@ -27,37 +27,17 @@ This is a basic example of integrating JBoss EAP 7.3 with SAML 2.0 and JAAS.
 
 
 
-
-
 <login-config>
-  <auth-method>FORM</auth-method>
-  <realm-name>saml-jaas</realm-name>
-  <form-login-config>
-    <form-login-page>/autoLogin</form-login-page>
-    <form-error-page>/error.jsp</form-error-page>
-  </form-login-config>
+    <auth-method>CLIENT-CERT</auth-method> <!-- ou BASIC, DIGEST, etc., mas não FORM -->
+    <realm-name>saml-security-domain</realm-name>
 </login-config>
 
 <security-constraint>
-  <web-resource-collection>
-    <web-resource-name>Protected Area</web-resource-name>
-    <url-pattern>/protected/*</url-pattern>
-  </web-resource-collection>
-  <auth-constraint>
-    <role-name>*</role-name>
-  </auth-constraint>
+    <web-resource-collection>
+        <web-resource-name>Protected Area</web-resource-name>
+        <url-pattern>/protected/*</url-pattern>
+    </web-resource-collection>
+    <auth-constraint>
+        <role-name>user</role-name>
+    </auth-constraint>
 </security-constraint>
-
-
-<%
-    response.sendRedirect("j_security_check");
-%>
-
-
-@WebServlet("/autoLogin")
-public class AutoLoginServlet extends HttpServlet {
-    @Override
-    protected void doGet(HttpServletRequest req, HttpServletResponse resp) throws IOException {
-        resp.sendRedirect("j_security_check");
-    }
-}
